@@ -1,3 +1,10 @@
+/**
+ * This sketch was used for a simple test case at the Nordic Edge Expo 2017 in Stavanger, Norway. 
+ * I had a couple of sensors attached to an Arduino board, connected to a Raspberry PI via USB, 
+ * and I uset NodeRED on the RPi to parse and display the data.
+ * 
+ */
+
 #include <DHT.h>
 
 #define PIN_SENSOR_DHT 7
@@ -7,7 +14,7 @@ const int pinAdc = A1;
 int pin = 8;
 unsigned long duration;
 unsigned long starttime;
-unsigned long sampletime_ms = 2000;//sampe 30s&nbsp;;
+unsigned long sampletime_ms = 2000;
 unsigned long lowpulseoccupancy = 0;
 float ratio = 0;
 String Dust = "";
@@ -66,16 +73,17 @@ void loop() {
       return;
     }
     else {
-    //Serial.print("concentration = ");
-    //Serial.print(Dust);
-    //Serial.println(" pcs/0.01cf");
-    //Serial.println("\n");
-    lowpulseoccupancy = 0;
-    starttime = millis();
+      //  Print til serial for debug.
+      //Serial.print("concentration = ");
+      //Serial.print(Dust);
+      //Serial.println(" pcs/0.01cf");
+      //Serial.println("\n");
+      lowpulseoccupancy = 0;
+      starttime = millis();
     }
   }
 
-//Crea un string con el formato: NData Data1 Data2 Data3 ... DataN
+//Making a string of the format: NData Data1 Data2 Data3 ... DataN
   str_Payload += NData;
   str_Payload += " " + Temp_DHT;
   str_Payload += " " + Humid_DHT;
@@ -91,6 +99,8 @@ void loop() {
   Serial.print(str_Payload);
     
   delay(2000);
+
+//  Print til serial for debug.
 //  Serial.print(analogRead(A1));
 //  Serial.print(analogRead(A2));
 //  Serial.print(analogRead(A3));
